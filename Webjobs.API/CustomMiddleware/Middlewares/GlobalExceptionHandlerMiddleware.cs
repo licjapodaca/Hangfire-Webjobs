@@ -22,11 +22,15 @@ namespace Webjobs.API.CustomMiddleware.Middlewares
 		{
 			try
 			{
+				// Logic to perform on request
+
 				await _next(context);
+
+				// Logic to perform on response
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError($"Error: {ex}");
+				_logger.LogError($"Error <==================== {ex}");
 				await HandleExceptionAsync(context, ex);
 			}
 		}
@@ -43,7 +47,7 @@ namespace Webjobs.API.CustomMiddleware.Middlewares
 		{
 			return new ErrorDetails()
 			{
-				StatusCode = (int)context.Response.StatusCode,
+				StatusCode = context.Response.StatusCode,
 				Message = exception.Message,
 				StackTrace = exception.StackTrace,
 				InnerException = exception.InnerException != null ? GetCompleteError(context, exception.InnerException) : null

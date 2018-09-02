@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Webjobs.API
 {
@@ -12,6 +13,10 @@ namespace Webjobs.API
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 			WebHost.CreateDefaultBuilder(args)
+				.UseContentRoot(Directory.GetCurrentDirectory())
+				.UseKestrel()
+				.UseIISIntegration()
 				.UseStartup<Startup>();
+				//.UseApplicationInsights();
 	}
 }

@@ -1,23 +1,19 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Net;
 using Webjobs.API.CustomMiddleware.Middlewares;
-using Webjobs.API.Models;
 
 namespace Webjobs.API.CustomMiddleware
 {
 	public static class CustomMiddlewareExtensions
 	{
-		public static IApplicationBuilder UseAuthorizationTokenReceptionMiddleware(this IApplicationBuilder builder)
+		public static IApplicationBuilder UseAuthorizationTokenReceptionMiddleware(this IApplicationBuilder builder, ILoggerFactory loggerFactory)
 		{
-			return builder.UseMiddleware<AuthorizationTokenReceptionMiddleware>();
+			return builder.UseMiddleware<AuthorizationTokenReceptionMiddleware>(loggerFactory);
 		}
 
-		public static IApplicationBuilder UseGlobalExceptionMiddleware(this IApplicationBuilder builder)
+		public static IApplicationBuilder UseGlobalExceptionMiddleware(this IApplicationBuilder builder, ILoggerFactory loggerFactory)
 		{
-			return builder.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+			return builder.UseMiddleware<GlobalExceptionHandlerMiddleware>(loggerFactory);
 		}
 	}
 }
