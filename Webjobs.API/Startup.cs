@@ -12,7 +12,6 @@ using Webjobs.API.Repositories.Contracts;
 using Webjobs.API.Repositories.Implementations;
 using System;
 using Webjobs.API.Tools;
-using Hangfire.SqlServer;
 
 namespace Webjobs.API
 {
@@ -73,7 +72,7 @@ namespace Webjobs.API
 			app.UseHangfireServer(new BackgroundJobServerOptions
 			{
 				WorkerCount = Environment.ProcessorCount * 5,
-				Queues = new[] { "high_importance", "normal_importance", "low_importance" }
+				Queues = new string[] { "high_importance", "normal_importance", "low_importance" }
 			});
 
 			app.UseHangfireDashboard();
