@@ -6,8 +6,9 @@ using Microsoft.Extensions.Logging;
 namespace Webjobs.API.Controllers
 {
 	[Route("api/[controller]")]
-    public class TestController : Controller
-    {
+	[ApiController]
+    public class TestController : ControllerBase
+	{
 		private readonly ILogger _logger;
 
 		public TestController(ILoggerFactory loggerFactory)
